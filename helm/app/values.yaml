@@ -4,7 +4,7 @@ image:
   tag: latest
   pullPolicy: Always
 service:
-  type: ClusterIP
+  type: NodePort
   port: 80
   nodePort: 30081
 env:

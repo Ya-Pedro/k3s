@@ -1,0 +1,29 @@
+- name: Deploy K3s, ArgoCD and Application
+  hosts: k3s_nodes
+  become: yes
+  tasks:
+    - name: Установка K3s
+      shell: curl -sfL https://get.k3s.io | sh -
+      args:
+        creates: /usr/local/bin/k3s
+
+    - name: Ожидание готовности ноды
+      command: k3s kubectl get nodes
+      register: nodes
+      until: '" Ready " in nodes.stdout'
+      retries: 10
+      delay: 5
+
+    - name: Создание namespace argocd
+      command: k3s kubectl create namespace argocd --dry-run=client -o yaml | k3s kubectl apply -f -
+
+    - name: Установка ArgoCD
+      command: k3s kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+    - name: Копирование манифеста ArgoCD Applications на сервер
+      copy:
+        src: ../argocd/applications.yaml
+        dest: /tmp/applications.yaml
+
+    - name: Применение манифеста в кластер (деплой всего проекта)
+      command: k3s kubectl apply -f /tmp/applications.yaml

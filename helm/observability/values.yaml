@@ -3,7 +3,7 @@ kube-prometheus-stack:
     adminPassword: admin
     service:
       type: NodePort
-      nodePort: 8082
+      nodePort: 30082
   prometheusOperator:
     admissionWebhooks:
       enabled: false

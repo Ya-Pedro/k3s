@@ -6,7 +6,7 @@ image:
 service:
   type: ClusterIP
   port: 80
-  nodePort: 8081
+  nodePort: 30081
 env:
   DB_HOST: "crud-db-postgresql"
   DB_USER: "postgres"

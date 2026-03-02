@@ -1,7 +1,12 @@
 postgresql:
+  image:
+    tag: "16"
   auth:
     postgresPassword: "postgres"
     database: "postgres"
+
 redis:
+  image:
+    tag: "7.2"
   auth:
     enabled: false

@@ -8,8 +8,8 @@ service:
   port: 80
   nodePort: 30081
 env:
-  DB_HOST: "crud-db-postgresql"
+  DB_HOST: "crud-db-postgresql.database.svc.cluster.local"
   DB_USER: "postgres"
   DB_PASS: "postgres"
   DB_NAME: "postgres"
-  REDIS_HOST: "crud-db-redis-master"
+  REDIS_HOST: "crud-db-postgresql.database.svc.cluster.local"

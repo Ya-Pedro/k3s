@@ -1,6 +1,9 @@
 kube-prometheus-stack:
   grafana:
     adminPassword: admin
+    service:
+      type: NodePort
+      nodePort: 8082
   prometheusOperator:
     admissionWebhooks:
       enabled: false

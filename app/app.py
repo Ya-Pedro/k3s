@@ -7,22 +7,28 @@ from psycopg2.extras import RealDictCursor
 
 app = Flask(__name__)
 
-# Настройки подключения к БД
+# Настройки в app.py
 DB_CONFIG = {
-    "host": os.getenv("PG_HOST", "postgres"),
+    "host": os.getenv("DB_HOST", "crud-db-postgresql"), # Имя сервиса из Helm
     "port": os.getenv("PG_PORT", 5432),
-    "database": os.getenv("PG_NAME"),
-    "user": os.getenv("PG_USER"),
-    "password": os.getenv("PG_PASSWORD")
+    "database": os.getenv("DB_NAME", "postgres"),
+    "user": os.getenv("DB_USER", "postgres"),
+    "password": os.getenv("DB_PASS", "postgres")
 }
 
-# Подключение к Redis
-cache = redis.Redis(host=os.getenv("REDIS_HOST", "redis"), port=6379, decode_responses=True)
+# Подключение к Redis (имя сервиса из Helm)
+cache = redis.Redis(host=os.getenv("REDIS_HOST", "crud-db-redis-master"), port=6379, decode_responses=True)
 
 def get_db_connection():
     return psycopg2.connect(**DB_CONFIG, cursor_factory=RealDictCursor)
 
 # --- CRUD ---
+
+
+@app.route('/status', methods=['GET'])
+def status_check():
+    return jsonify({"status": " АОАОАОАО"})
+
 
 # CREATE
 @app.route('/users', methods=['POST'])

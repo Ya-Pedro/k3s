@@ -13,5 +13,6 @@ kubectl exec -it -n database crud-db-postgresql-0 -- psql -U postgres -d postgre
 curl -X GET http://192.168.122.57:30081/users/2
 
 
-https://192.168.122.57:8080/
-http://192.168.122.57:8082/
+https://192.168.122.57:30080/ #argo
+http://192.168.122.57:30082 #grafana
+http://192.168.122.57:30081/status #flask

@@ -12,4 +12,4 @@ env:
   DB_USER: "postgres"
   DB_PASS: "postgres"
   DB_NAME: "postgres"
-  REDIS_HOST: "crud-db-redis-master.database.svc.cluster.local"
+  REDIS_HOST: "crud-db"
